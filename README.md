@@ -1,9 +1,8 @@
 # BE-PNT2-A-2026-I
 
-Repositorio de la clase  de PNT2 B 2026-I
+Repositorio de la clase de PNT2 B 2026-I
 
 [Drive](https://drive.google.com/drive/folders/1UmLz_iBtPVkI4L3xBP0ba16kpCwqKGI1)
-
 
 # Consigna
 
@@ -20,3 +19,5 @@ Para iniciar el proyecto vamos crearnos una cuenta en github. A continuacion la 
 - Hacer un Pull request de sus respositorios (hechos mediante el fork) a la rama `main` del repositorio de la clase.
 
 # Listado de participantes:
+
+- Lautaro, Nola, lautaronola
