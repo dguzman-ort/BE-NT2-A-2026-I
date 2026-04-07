@@ -23,6 +23,6 @@ Para iniciar el proyecto vamos crearnos una cuenta en github. A continuacion la 
 - Lautaro, Nola, lautaronola
 - Hector de la Fuente, delafuentehector
 - Daniel Guzman, dguzman-ort.
-- Ezequiel Grynberg
+- Ezequiel Grynberg, ezemg
 - Zakiel Gimenez, zakiel-go. 
 - Francisco Bermingham, franbermingham
