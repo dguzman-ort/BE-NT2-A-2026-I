@@ -1,4 +1,4 @@
-import { personas } from './personas'
+import { personas } from './personas.js'
 
 /**
  * Hacer una funcion que dado un Array de participantes del curso, 
@@ -42,7 +42,7 @@ const devuelveAlumnoMayorEdad2 = (participantes) => {
 const alumnoMayor = devuelveAlumnoMayorEdad2(personas)
 console.table(alumnoMayor)
 
-//alumnoMayor.age = 100
+alumnoMayor.age = 100;
 
-console.log(personas)
+console.log(personas);
 
