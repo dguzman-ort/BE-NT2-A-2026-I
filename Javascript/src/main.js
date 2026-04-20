@@ -13,7 +13,10 @@ import { setupCounter } from './counter.js'
 //import './js/promises-2'
 
 /** Ejercicios */
-import './js/ejercicios/objetos'
+// /import './js/ejercicios/objetos'
+// import './js/ejercicios/filter'
+//import './js/ejercicios/map'
+import './js/ejercicios/reduce'
 
 
 

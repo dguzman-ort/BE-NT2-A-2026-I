@@ -1,3 +1,4 @@
+import { personas, EDAD_MINIMA } from './personas'
 //Referencia: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
 /**
@@ -14,6 +15,16 @@
  *  n
  * ]
  */
+
+console.log('Listado Original:', personas)
+
+const filtraPersonas = (listaPersonas) => {
+  return listaPersonas.filter(persona => persona.age >= EDAD_MINIMA)
+}
+
+const personasFiltradas = filtraPersonas(personas)
+console.table(personasFiltradas)
+
 import { personas } from "./personas.js";
 import { EDAD_MINIMA } from "./personas.js";
 let personasAptasCasino = personas.filter(personas => personas.age > EDAD_MINIMA);
