@@ -1,4 +1,3 @@
-import { personas, EDAD_MINIMA } from './personas'
 
 // Referencia: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 
@@ -8,18 +7,15 @@ import { personas, EDAD_MINIMA } from './personas'
  * si puede entrar o no en un casino
  */
 
-console.log('Listado Original:', personas)
+import {personas, EDAD_MINIMA} from "./personas.js";
 
-const listadoCurado = (listaPersonas) => {
 
-    return listaPersonas.map(persona =>{
-        const allowed = persona.age >= EDAD_MINIMA
-        return {
-            ...persona,
-            allowed
-        }
-    })
+function generarPermisoEntrada(personas){
+    return personas.map(persona => {
+    return {
+        ...persona,
+        allowed: persona.age >= EDAD_MINIMA
+        };
+    });
 }
-
-const listaFinal = listadoCurado(personas)
-console.table(listaFinal)
+console.log(generarPermisoEntrada(personas))
