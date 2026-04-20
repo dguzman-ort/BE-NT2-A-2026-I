@@ -42,7 +42,7 @@ const devuelveAlumnoMayorEdad2 = (participantes) => {
 const alumnoMayor = devuelveAlumnoMayorEdad2(personas)
 console.table(alumnoMayor)
 
-alumnoMayor.age = 100;
+//alumnoMayor.age = 100;
 
 console.log(personas);
 
