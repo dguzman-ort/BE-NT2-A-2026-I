@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native"
 import { Ionicons, MaterialCommunityIcons, Feather } from "@expo/vector-icons"
 import { useEffect } from "react"
-
+import { Link } from "expo-router"
 const formatPrecio = (precio) => {
     return Number(precio).toLocaleString("en-US")
 }
@@ -67,9 +67,16 @@ const Vehiculo = ({ vehiculo }) => {
                     />
                 </View>
 
-                <Pressable style={styles.rentButton}>
-                    <Text style={styles.rentText}>Rent Now</Text>
-                </Pressable>
+                <Link 
+                    href={{
+                        pathname: '/vehiculo/[id]',
+                        params: { id: vehiculo.id }
+                      }}
+                    asChild>
+                    <Pressable style={styles.rentButton}>
+                        <Text style={styles.rentText}>Ver detalle</Text>
+                    </Pressable>
+                </Link>
             </View>
         </View>
     )

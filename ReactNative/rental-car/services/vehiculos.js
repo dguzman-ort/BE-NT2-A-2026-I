@@ -19,12 +19,30 @@ const marcas = [
     },
 ]
 
+const ubicaciones = [
+    {
+        nombre: 'Buenos Aires, Argentina',
+        latitude: -34.6037,
+        longitude: -58.3816,
+    },
+    {
+        nombre: 'Córdoba, Argentina',
+        latitude: -31.420085,
+        longitude: -64.188613,
+    },
+    {
+        nombre: 'Rosario, Argentina',
+        latitude: -32.954539,
+        longitude: -60.639262,
+    },
+]
+
 const colores = ['rojo', 'azul', 'blanco', 'negro', 'gris']
 
 const crearVehiculo = (index) => {
     const marca = marcas[index % marcas.length]
     const modelo = marca.modelos[index % marca.modelos.length]
-
+    const ubicacion = ubicaciones[index % ubicaciones.length]
     return {
         id: index + 1,
         marca: marca.nombre,
@@ -33,9 +51,31 @@ const crearVehiculo = (index) => {
         color: colores[index % colores.length],
         precio: 1000 + index * 150,
         imagen: `https://media.toyota.com.ar/5019492b-2618-458b-91ee-6cefd1ca98a0.png`,
+        location: ubicacion.nombre,
+        latitude: ubicacion.latitude,
+        longitude: ubicacion.longitude,
     }
 }
 
 const vehiculos = Array.from({ length: MAX_VEHICULOS }, (_, index) => crearVehiculo(index))
 
-export { crearVehiculo, vehiculos }
+const getVehiculoById = (id) => {
+    return new Promise((resolve) => {
+        // console.log('getVehiculoById', id);
+        setTimeout(() => {
+            resolve(vehiculos.find((vehiculo) => vehiculo.id === id));
+        }, 1000); // Simular una demora de 1 segundo
+    });
+}
+const getVehiculos = () => {
+    return new Promise((resolve) => {
+        
+        // console.log('getVehiculos');
+        setTimeout(() => {
+            resolve(vehiculos);
+        }, 1000); // Simular una demora de 1 segundo
+    });
+}
+
+
+export { getVehiculos, getVehiculoById }
