@@ -4,6 +4,7 @@ import HomeScrollView from '../components/HomeScrollView';
 import HomeFlatList from '../components/HomeFlatList';
 import { getVehiculos } from '../services/vehiculos';
 import { useState, useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [vehiculos, setVehiculos] = useState([]);
@@ -13,7 +14,8 @@ export default function App() {
     });
   }, []);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      
       <StatusBar style="auto" />
       {/* Listado con scrollView */}
       {/* <HomeScrollView vehiculos={vehiculos}  /> */}
@@ -21,7 +23,9 @@ export default function App() {
 
       {/* Listado con FlatList */}
       <HomeFlatList vehiculos={vehiculos} />
-    </View>
+      
+    </SafeAreaView>
+    
   );
 }
 

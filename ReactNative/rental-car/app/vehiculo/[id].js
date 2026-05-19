@@ -1,5 +1,4 @@
 import {
-    SafeAreaView,
     ScrollView,
     View,
     Text,
@@ -13,6 +12,10 @@ import { useLocalSearchParams } from 'expo-router';
 import { useState, useEffect } from 'react';
 import { getVehiculoById } from '../../services/vehiculos'; 
 import { router } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import * as Location from 'expo-location';
+import MapView, { Marker } from 'react-native-maps';
+
 
 const formatPrecio = (precio) => {
     return Number(precio).toLocaleString("en-US");
@@ -28,9 +31,6 @@ const COLORS = {
     surfaceContainerHighest: '#D3E4FE',
     cta: '#10B981',
 };
-
-const HERO_IMAGE_URI =
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuCiojBaWWhL7x8FXWZtOsgqbb1DTk3RqwuJQUDbF5_qrWyKj93AL0vcHwyGaf76ID99dRdb_R_529grfdO-XkOcEh8oGuObvblVr_kyHDjPJDBLySfDMcLLSyZSZTag7PkGs1t1dEEh9jHbDWsvfP5YvdEBjMFNDK54x2BHbeBHyPEh1d2cPtr5Uk5_jQJh4L3enWm-7Z4t7uR8h311DZOYkOJTz4JxR3YBtpPMRvnoYdY9ZJmJzSiRVUQUQ8ygXg6pKs8cBmA_68lJ';
 
 const SPECS = [
     {
@@ -67,6 +67,10 @@ const SpecCard = ({ icon, label, value }) => (
 
 const VehiculoDetalle = () => {
     const [vehiculo, setVehiculo] = useState(null);
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+
+
     const { width } = useWindowDimensions();
     const heroHeight = (width * 3) / 4;
 
@@ -77,6 +81,25 @@ const VehiculoDetalle = () => {
             setVehiculo(vehiculo);
         });
     }, [id]);
+
+
+    useEffect(() => {
+        async function getCurrentLocation() {
+          
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          console.log('location', location);
+          setLocation(location);
+        }
+    
+        getCurrentLocation();
+      }, []);
+
 
     if (!vehiculo) {
         return (
@@ -158,7 +181,25 @@ const VehiculoDetalle = () => {
 
                         {/* Map placeholder */}
                         <View style={styles.mapPlaceholder}>
-                            <Text style={styles.mapPlaceholderText}>Mapa próximamente</Text>
+                            {location && (
+                                <MapView
+                                    initialRegion={{
+                                        latitude: vehiculo?.latitude,
+                                        longitude: vehiculo?.longitude,
+                                        latitudeDelta: 0.01,
+                                        longitudeDelta: 0.01,
+                                    }}
+                                    style={styles.map} >
+                                        <Marker
+                                            coordinate={{
+                                                latitude: vehiculo?.latitude,
+                                                longitude: vehiculo?.longitude,
+                                            }}
+                                            title={vehiculo?.casa_rental}
+                                            useLegacyPinView={false}
+                                        />
+                                </MapView>
+                            )}
                         </View>
                     </View>
                 </View>
@@ -337,6 +378,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: COLORS.outline,
         fontWeight: '500',
+    },
+    map: {
+        width: '100%',
+        height: '100%',
     },
     ctaContainer: {
         position: 'absolute',

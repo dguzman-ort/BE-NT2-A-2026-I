@@ -24,16 +24,19 @@ const ubicaciones = [
         nombre: 'Buenos Aires, Argentina',
         latitude: -34.6037,
         longitude: -58.3816,
+        casa_rental: 'Budgets Cars',
     },
     {
         nombre: 'Córdoba, Argentina',
         latitude: -31.420085,
         longitude: -64.188613,
+        casa_rental: 'Rent a Car, co',
     },
     {
         nombre: 'Rosario, Argentina',
         latitude: -32.954539,
         longitude: -60.639262,
+        casa_rental: 'Hertz Cars',
     },
 ]
 
@@ -54,6 +57,7 @@ const crearVehiculo = (index) => {
         location: ubicacion.nombre,
         latitude: ubicacion.latitude,
         longitude: ubicacion.longitude,
+        casa_rental: ubicacion.casa_rental,
     }
 }
 
