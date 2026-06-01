@@ -41,6 +41,7 @@ const ubicaciones = [
 ]
 
 const colores = ['rojo', 'azul', 'blanco', 'negro', 'gris']
+const categorias = ['Luxury', 'SUV', 'Sedan', 'Electric', 'Sports']
 
 const crearVehiculo = (index) => {
     const marca = marcas[index % marcas.length]
@@ -52,6 +53,7 @@ const crearVehiculo = (index) => {
         modelo,
         anio: 2024 - (index % 5),
         color: colores[index % colores.length],
+        categoria: categorias[index % categorias.length],
         precio: 1000 + index * 150,
         imagen: `https://media.toyota.com.ar/5019492b-2618-458b-91ee-6cefd1ca98a0.png`,
         location: ubicacion.nombre,

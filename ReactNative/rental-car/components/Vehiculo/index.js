@@ -1,6 +1,5 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native"
 import { Ionicons, MaterialCommunityIcons, Feather } from "@expo/vector-icons"
-import { useEffect } from "react"
 import { Link } from "expo-router"
 const formatPrecio = (precio) => {
     return Number(precio).toLocaleString("en-US")
@@ -84,10 +83,10 @@ const Vehiculo = ({ vehiculo }) => {
 
 const styles = StyleSheet.create({
     card: {
-        width: 345,
+        alignSelf: "stretch",
         backgroundColor: "#FFF",
         borderRadius: 16,
-        marginHorizontal: 16,
+        marginHorizontal: 20,
         marginVertical: 10,
         shadowColor: "#000",
         shadowOffset: {
@@ -99,11 +98,12 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     imageWrapper: {
-        height: 190,
+        height: 188,
         overflow: "hidden",
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
         position: "relative",
+        backgroundColor: "#FFFFFF",
     },
     image: {
         width: "100%",
