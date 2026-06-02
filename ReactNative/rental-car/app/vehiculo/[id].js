@@ -13,8 +13,7 @@ import { useState, useEffect } from 'react';
 import { getVehiculoById } from '../../services/vehiculos'; 
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as Location from 'expo-location';
-import MapView, { Marker } from 'react-native-maps';
+import VehicleMap from '../../components/VehicleMap';
 
 
 const formatPrecio = (precio) => {
@@ -67,8 +66,6 @@ const SpecCard = ({ icon, label, value }) => (
 
 const VehiculoDetalle = () => {
     const [vehiculo, setVehiculo] = useState(null);
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
 
 
     const { width } = useWindowDimensions();
@@ -81,25 +78,6 @@ const VehiculoDetalle = () => {
             setVehiculo(vehiculo);
         });
     }, [id]);
-
-
-    useEffect(() => {
-        async function getCurrentLocation() {
-          
-          let { status } = await Location.requestForegroundPermissionsAsync();
-          if (status !== 'granted') {
-            setErrorMsg('Permission to access location was denied');
-            return;
-          }
-    
-          let location = await Location.getCurrentPositionAsync({});
-          console.log('location', location);
-          setLocation(location);
-        }
-    
-        getCurrentLocation();
-      }, []);
-
 
     if (!vehiculo) {
         return (
@@ -181,25 +159,13 @@ const VehiculoDetalle = () => {
 
                         {/* Map placeholder */}
                         <View style={styles.mapPlaceholder}>
-                            {location && (
-                                <MapView
-                                    initialRegion={{
-                                        latitude: vehiculo?.latitude,
-                                        longitude: vehiculo?.longitude,
-                                        latitudeDelta: 0.01,
-                                        longitudeDelta: 0.01,
-                                    }}
-                                    style={styles.map} >
-                                        <Marker
-                                            coordinate={{
-                                                latitude: vehiculo?.latitude,
-                                                longitude: vehiculo?.longitude,
-                                            }}
-                                            title={vehiculo?.casa_rental}
-                                            useLegacyPinView={false}
-                                        />
-                                </MapView>
-                            )}
+                            <VehicleMap
+                                latitude={vehiculo?.latitude}
+                                longitude={vehiculo?.longitude}
+                                title={vehiculo?.casa_rental}
+                                locationName={vehiculo?.location}
+                                style={styles.map}
+                            />
                         </View>
                     </View>
                 </View>
@@ -207,7 +173,21 @@ const VehiculoDetalle = () => {
 
             {/* Bottom CTA */}
             <View style={styles.ctaContainer}>
-                <Pressable style={styles.ctaButton}>
+                <Pressable
+                    style={styles.ctaButton}
+                    onPress={() =>
+                        router.push({
+                            pathname: '/reservar/[id]',
+                            params: {
+                                id: vehiculo.id,
+                                marca: vehiculo.marca,
+                                modelo: vehiculo.modelo,
+                                precio: vehiculo.precio,
+                                imagen: vehiculo.imagen,
+                            },
+                        })
+                    }
+                >
                     <Text style={styles.ctaText}>Reservar Ahora</Text>
                 </Pressable>
             </View>
