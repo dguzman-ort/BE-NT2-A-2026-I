@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons"
-import { ScrollView, StyleSheet, Text, View } from "react-native"
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useAuth } from "../../hook/useAuth"
 
 const OPTIONS = [
     { icon: "card-outline", label: "Payment methods", value: "2 cards" },
@@ -23,6 +24,7 @@ const ProfileOption = ({ option }) => (
 )
 
 export default function Profile() {
+    const { setAuth } = useAuth()
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -37,9 +39,13 @@ export default function Profile() {
                     </View>
                     <Text style={styles.name}>Daniel Martinez</Text>
                     <Text style={styles.email}>daniel@luxedrive.app</Text>
-                    <View style={styles.memberBadge}>
-                        <Text style={styles.memberText}>Elite member</Text>
-                    </View>
+                    <Pressable style={styles.logoutButton}
+                    onPress={() => {
+                        setAuth(null)
+                    }}
+                    >
+                        <Text style={styles.logoutButtonText}>Logout</Text>
+                    </Pressable>
                 </View>
 
                 <View style={styles.optionsCard}>

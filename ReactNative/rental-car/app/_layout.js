@@ -1,11 +1,10 @@
-import { Stack } from "expo-router"
+import { AuthProvider } from "../hook/useAuth"
+import Navigation from "./navigation"
 
 export default function RootLayout() {
     return (
-        <Stack
-            screenOptions={{
-                headerShown: false,
-            }}
-        />
+        <AuthProvider>
+            <Navigation />
+        </AuthProvider>
     )
 }
