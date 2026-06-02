@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://localhost:8787'
-const BASE_URL = 'http://localhost:8787'
+const BASE_URL = 'https://localhost:8787'
+// const BASE_URL = 'https://ff21-2800-810-54b-1539-803c-f9a6-9263-17da.ngrok-free.app'
 
 const MAX_VEHICULOS = 10000
 
