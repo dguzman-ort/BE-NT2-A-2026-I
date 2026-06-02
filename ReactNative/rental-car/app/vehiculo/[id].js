@@ -173,7 +173,21 @@ const VehiculoDetalle = () => {
 
             {/* Bottom CTA */}
             <View style={styles.ctaContainer}>
-                <Pressable style={styles.ctaButton}>
+                <Pressable
+                    style={styles.ctaButton}
+                    onPress={() =>
+                        router.push({
+                            pathname: '/reservar/[id]',
+                            params: {
+                                id: vehiculo.id,
+                                marca: vehiculo.marca,
+                                modelo: vehiculo.modelo,
+                                precio: vehiculo.precio,
+                                imagen: vehiculo.imagen,
+                            },
+                        })
+                    }
+                >
                     <Text style={styles.ctaText}>Reservar Ahora</Text>
                 </Pressable>
             </View>

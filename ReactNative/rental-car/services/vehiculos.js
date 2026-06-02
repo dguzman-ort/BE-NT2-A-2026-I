@@ -1,3 +1,6 @@
+// const BASE_URL = 'https://localhost:8787'
+const BASE_URL = 'http://localhost:8787'
+
 const MAX_VEHICULOS = 10000
 
 const marcas = [
@@ -65,23 +68,78 @@ const crearVehiculo = (index) => {
 
 const vehiculos = Array.from({ length: MAX_VEHICULOS }, (_, index) => crearVehiculo(index))
 
-const getVehiculoById = (id) => {
-    return new Promise((resolve) => {
-        // console.log('getVehiculoById', id);
-        setTimeout(() => {
-            resolve(vehiculos.find((vehiculo) => vehiculo.id === id));
-        }, 1000); // Simular una demora de 1 segundo
-    });
+const getVehiculoById = async (id) => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/v1/vehicles/${id}`)
+        if (!response.ok) {
+            throw new Error('Failed to fetch vehicle by id');
+        }
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error('Error fetching vehicle by id:', error);
+        throw error;
+    }
 }
-const getVehiculos = () => {
-    return new Promise((resolve) => {
-        
-        // console.log('getVehiculos');
-        setTimeout(() => {
-            resolve(vehiculos);
-        }, 1000); // Simular una demora de 1 segundo
-    });
+const getVehiculos = async () => {
+    
+    try {
+        const response = await fetch(`${BASE_URL}/api/v1/vehicles`)
+        const { data, pagination } = await response.json()
+        console.log('data', data);
+        return data
+    } catch (error) {
+        console.error('Error fetching vehicles:', error);
+        throw error;
+    }
 }
 
+const getBookings = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/v1/bookings`, {
+            headers: {
+                'X-User-Id': '123',
+            },
+        })
+        const { data, pagination } = await response.json()
+        return data
+    } catch (error) {
+        console.error('Error fetching bookings:', error);
+        throw error;
+    }
+}
 
-export { getVehiculos, getVehiculoById }
+const bookVehicle = async (vehicleId, startDate, endDate) => {
+    //const accessToken = await getAccessToken()
+    try {
+        const body = {
+            vehicle_id: vehicleId,
+            start_date: startDate,
+            end_date: endDate,
+        }
+        const response = await fetch(`${BASE_URL}/api/v1/bookings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'Authorization': `Bearer ${accessToken}`,
+                'X-User-Id': '123',
+            },
+            body: JSON.stringify(body),
+        })
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => null)
+            const message = errorData?.error?.message || 'Failed to reserve vehicle'
+            throw new Error(message);
+        }
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error('Error reserving vehicle:', error);
+        throw error;
+    }
+}
+    
+
+
+
+export { getVehiculos, getVehiculoById, bookVehicle, getBookings }

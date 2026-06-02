@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar"
 import { useEffect, useMemo, useState } from "react"
-import { StyleSheet, View } from "react-native"
+import { Alert, StyleSheet, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Filters from "../../components/Filters"
@@ -17,6 +17,9 @@ export default function Home() {
     useEffect(() => {
         getVehiculos().then((vehiculosResponse) => {
             setVehiculos(vehiculosResponse)
+        }).catch((error) => {
+            console.error('Error fetching vehicles:', error);
+            Alert.alert('Error', error.message)
         })
     }, [])
 

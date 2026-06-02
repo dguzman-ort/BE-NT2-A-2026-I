@@ -1,33 +1,37 @@
 import { Ionicons } from "@expo/vector-icons"
-import { ScrollView, StyleSheet, Text, View } from "react-native"
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { getBookings } from "../../services/vehiculos"
+import { useEffect, useState } from "react"
 
-const BOOKINGS = [
-    {
-        id: "1",
-        vehicle: "Porsche Taycan",
-        date: "Jun 12 - Jun 16",
-        location: "Buenos Aires, Argentina",
-        status: "Confirmed",
-        price: "$1,200/day",
-    },
-    {
-        id: "2",
-        vehicle: "BMW X7 M60i",
-        date: "Jul 03 - Jul 05",
-        location: "Cordoba, Argentina",
-        status: "Pending",
-        price: "$850/day",
-    },
-    {
-        id: "3",
-        vehicle: "Mercedes S-Class",
-        date: "Aug 18 - Aug 22",
-        location: "Rosario, Argentina",
-        status: "Completed",
-        price: "$1,100/day",
-    },
-]
+// const BOOKINGS = [
+//     {
+//         id: "1",
+//         vehicle: "Porsche Taycan",
+//         date: "Jun 12 - Jun 16",
+//         location: "Buenos Aires, Argentina",
+//         status: "Confirmed",
+//         price: "$1,200/day",
+//     },
+//     {
+//         id: "2",
+//         vehicle: "BMW X7 M60i",
+//         date: "Jul 03 - Jul 05",
+//         location: "Cordoba, Argentina",
+//         status: "Pending",
+//         price: "$850/day",
+//     },
+//     {
+//         id: "3",
+//         vehicle: "Mercedes S-Class",
+//         date: "Aug 18 - Aug 22",
+//         location: "Rosario, Argentina",
+//         status: "Completed",
+//         price: "$1,100/day",
+//     },
+// ]
+
+
 
 const BookingCard = ({ booking }) => (
     <View style={styles.card}>
@@ -53,6 +57,16 @@ const BookingCard = ({ booking }) => (
 )
 
 export default function Bookings() {
+    const [bookings, setBookings] = useState([])
+
+    useEffect(() => {
+        getBookings().then((bookings) => {
+            setBookings(bookings)
+        }).catch((error) => {
+            console.error('Error fetching bookings:', error);
+            Alert.alert('Error', error.message)
+        })
+    }, [])
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -61,7 +75,7 @@ export default function Bookings() {
                     <Text style={styles.subtitle}>Your upcoming and past reservations.</Text>
                 </View>
 
-                {BOOKINGS.map((booking) => (
+                {bookings.map((booking) => (
                     <BookingCard key={booking.id} booking={booking} />
                 ))}
             </ScrollView>
