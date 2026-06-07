@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mindful Archive - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed-variant": "#704e72",
+              "inverse-surface": "#0e0e12",
+              "primary-container": "#bbb9f1",
+              "primary-fixed-dim": "#adabe2",
+              "surface-bright": "#fcf8fe",
+              "surface-container-high": "#eae6f1",
+              "surface-tint": "#5b5a8b",
+              "outline-variant": "#b3b0bc",
+              "error": "#a8364b",
+              "tertiary-container": "#fdd2fd",
+              "inverse-on-surface": "#9e9ca2",
+              "surface-variant": "#e4e1ed",
+              "outline": "#7b7984",
+              "surface-container-low": "#f6f2fa",
+              "on-secondary-fixed": "#3e3d51",
+              "tertiary-dim": "#68486b",
+              "secondary-dim": "#525166",
+              "on-secondary-fixed-variant": "#5b596e",
+              "on-primary": "#fbf7ff",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#32313b",
+              "secondary-container": "#e3e0f9",
+              "on-surface": "#32313b",
+              "on-surface-variant": "#5f5e68",
+              "on-primary-fixed-variant": "#3f3e6e",
+              "surface-container": "#f0ecf6",
+              "error-dim": "#6b0221",
+              "primary-dim": "#4f4e7e",
+              "inverse-primary": "#bbb9f1",
+              "secondary-fixed-dim": "#d5d2eb",
+              "tertiary-fixed": "#fdd2fd",
+              "surface-container-highest": "#e4e1ed",
+              "on-primary-container": "#363564",
+              "on-error": "#fff7f7",
+              "primary-fixed": "#bbb9f1",
+              "tertiary": "#755478",
+              "tertiary-fixed-dim": "#eec4ef",
+              "on-error-container": "#6e0523",
+              "on-primary-fixed": "#21204d",
+              "secondary": "#5e5d72",
+              "background": "#fcf8fe",
+              "on-tertiary": "#fff7fa",
+              "surface-dim": "#dcd8e4",
+              "on-tertiary-container": "#654568",
+              "error-container": "#f97386",
+              "primary": "#5b5a8b",
+              "on-secondary": "#fbf7ff",
+              "on-tertiary-fixed": "#513254",
+              "on-secondary-container": "#515064",
+              "surface": "#fcf8fe",
+              "secondary-fixed": "#e3e0f9"
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px"
+            },
+            fontFamily: {
+              headline: ["Manrope"],
+              body: ["Inter"],
+              label: ["Inter"]
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        line-height: 1;
+        vertical-align: middle;
+      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
