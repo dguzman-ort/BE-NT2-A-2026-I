@@ -84,7 +84,11 @@ const getVehiculoById = async (id) => {
 const getVehiculos = async () => {
     
     try {
-        const response = await fetch(`${BASE_URL}/api/v1/vehicles`)
+        const response = await fetch(`${BASE_URL}/api/v1/vehicles`, {
+            // headers: {
+            //     'Authorization': `Bearer ${accessToken}`,
+            // },
+        })
         const { data, pagination } = await response.json()
         console.log('data', data);
         return data

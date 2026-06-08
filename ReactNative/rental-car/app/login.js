@@ -13,7 +13,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context"
 import { StatusBar } from "expo-status-bar"
 import { Ionicons } from "@expo/vector-icons"
-import { login } from "../services/authService"
+import authService from "../services/authService"
 import { useAuth } from "../hook/useAuth"
 
 const COLORS = {
@@ -35,7 +35,7 @@ export default function Login() {
     const handleLogin = () => {
         console.log('email', email)
         console.log('password', password)
-        login(email, password).then((response) => {
+        authService.login(email, password).then((response) => {
             setAuth(response)
         }).catch((error) => {
             Alert.alert('Error', error.error)
