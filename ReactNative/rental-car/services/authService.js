@@ -1,3 +1,4 @@
+const AUTH_KEY = '@auth_data'
 const login = async (email, password) => {
     // const response = await fetch('http://localhost:8787/api/v1/auth/login', {
     //     method: 'POST',
@@ -30,4 +31,4 @@ const login = async (email, password) => {
     })
 }
 
-export { login }
+export default { login, AUTH_KEY }
